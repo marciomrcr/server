@@ -8,6 +8,18 @@ npm i prisma -D
 npm i @prisma/client
 npx prisma init --datasource-provider SQLite
 npx prisma migrate dev
+
+# Alterar package.json
+"scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+
+  
+npx prisma db seed
 npx prisma studio
 
 
