@@ -26,3 +26,9 @@ npx prisma studio
 # Diagrama ERD
 npm i prisma-erd-generator @mermaid-js/mermaid-cli -D
 npx prisma generate
+
+#Validação de dados
+npm i zod
+
+#Geração de id automático para o code do bolão
+npm i short-unique-id
