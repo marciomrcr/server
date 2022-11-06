@@ -3,10 +3,12 @@ import { PrismaClient } from "@prisma/client";
 import Fastify from "fastify";
 import ShortUniqueId from "short-unique-id";
 import { z } from "zod";
+import { prisma } from "./lib/prisma";
+import { guessRoutes } from "./routes/guess";
+import { poolRoutes } from "./routes/pool";
+import { userRoutes } from "./routes/user";
 
-const prisma = new PrismaClient({
-  log: ["query"],
-});
+
 
 async function bootstrap() {
   const fastify = Fastify({
@@ -17,23 +19,14 @@ async function bootstrap() {
     origin: true,
   });
 
-  fastify.get("/clientes/count", async () => {
-    const count = await prisma.cliente.count();
+  fastify.register(poolRoutes)
 
-    return { count };
-  });
+  fastify.register(userRoutes)
 
-  fastify.get("/users/count", async () => {
-    const count = await prisma.user.count();
+  fastify.register(guessRoutes)
 
-    return { count };
-  });
 
-  fastify.get("/guesses/count", async () => {
-    const count = await prisma.guess.count();
 
-    return { count };
-  });
 
   fastify.get("/pools/count", async () => {
     const count = await prisma.pool.count();
